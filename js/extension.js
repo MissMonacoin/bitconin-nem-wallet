@@ -20,6 +20,13 @@ const extensions={
     component:require("../component/zaifPay.js"),
     icon:require("../res/zaifpay.png"),
     scheme:"zaifPay"
+  },
+  hVuereau:{
+    id:"hVuereau",
+    name:"H-Vuereau",
+    component:require("../component/h-vuereau.js"),
+    icon:require("../res/zaifpay.png"),
+    scheme:"h-vuereau"
   }
 }
 exports.get=extId=>{

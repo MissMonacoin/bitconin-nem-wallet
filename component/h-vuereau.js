@@ -35,7 +35,7 @@ function hex2str(s){
   return (Buffer.from(s,"hex")).toString("utf8")
 }
 
-module.exports=require("../js/lang.js")({ja:require("./ja/nem.html"),en:require("./en/nem.html")})({
+module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:require("./en/h-vuereau.html")})({
   data(){
     return {
       sendAmount:0,

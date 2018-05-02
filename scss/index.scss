@@ -513,7 +513,7 @@ ons-popover .popover__content{
   }
 }
 $passwordHeight:30px;
-[data-page="login"],[data-page="xrp"],[data-page="nem"]{
+[data-page="login"],[data-page="xrp"],[data-page="nem"],[data-page="h-vuereau"]{
   .wrap{
     padding:35px;
     text-align:center;
@@ -583,6 +583,35 @@ $zaifPayLogoSize:200px;
     background-size:contain;
     background-position:center center;
     
+  }
+}
+
+$hv-color:#024667;
+[data-page="h-vuereau"]{
+  .page__background{
+    
+    background-color:#32ebe2;
+
+    background: linear-gradient(to bottom, rgba(50,235,226,1) 0%, rgba(52,177,235,1) 100%);
+  }
+  
+  ons-toolbar{
+    ons-icon,.toolbar__title,.back-button__icon{
+      color: $hv-color;
+      fill:$hv-color;
+    }
+  
+  }
+  .wrap{
+    background-color:rgba(255,255,255,0.6);
+  }
+  #banner{
+    width:100%;
+    height:500px;
+    background-image:url(../res/h-vuereau.png);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:top center;
   }
 }
 
