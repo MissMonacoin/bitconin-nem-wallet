@@ -26,9 +26,12 @@ const defaultCoins=[
       {
         url:"https://mona.insight.monaco-ex.org/insight-api-monacoin",
         explorer:"https://mona.insight.monaco-ex.org/insight"
+      },
+      {
+        url:"https://mona.insight.monacoin.ml/insight-api-monacoin",
+        explorer:"https://mona.insight.monacoin.ml/insight"
       }
-    ],
-    explorer:"https://mona.insight.monaco-ex.org/insight",
+	    ],
     network:{
       messagePrefix: '\x19Monacoin Signed Message:\n',
       bip32: {
@@ -86,7 +89,7 @@ const defaultCoins=[
     },
     enableSegwit:false,
     price:{
-      url:"https://insight.neetcoin.jp/api/ticker",
+      url:"https://api.crypto-bridge.org/api/v1/ticker",
       json:true,
       jsonPath:'$[?(@.id=="ZNY_BTC")].last',
       fiat:"btc"
@@ -122,6 +125,7 @@ const defaultCoins=[
       },
       pubKeyHash: 0,
       scriptHash: 5,
+      bech32:"bc",
       wif: 128
     },
     enableSegwit:false,
@@ -158,7 +162,7 @@ const defaultCoins=[
       pubKeyHash: 48,
       scriptHash: 5,
       wif: 176,
-      bech32:"lc"
+      bech32:"ltc"
     },
     enableSegwit:false,
     price:{
@@ -234,6 +238,7 @@ const defaultCoins=[
       },
       pubKeyHash: 0,// 1
       scriptHash: 5,// 3
+       bech32:"bc",
       wif: 128
     },
     enableSegwit:"legacy",
@@ -262,7 +267,8 @@ const defaultCoins=[
     apiEndpoints:[
       {url:"https://bch-bitcore1.trezor.io/api",explorer:"https://bch-bitcore1.trezor.io"},
       {url:"https://bch-bitcore3.trezor.io/api",explorer:"https://bch-bitcore3.trezor.io"},
-      {url:"https://bch-bitcore2.trezor.io/api",explorer:"https://bch-bitcore2.trezor.io"}
+      {url:"https://bch-bitcore2.trezor.io/api",explorer:"https://bch-bitcore2.trezor.io"},
+      {url:"https://bch-insight.bitpay.com/api",explorer:"https://bch-insight.bitpay.com"},
     ],
     network:{
       messagePrefix: '\x18Bitcoin Signed Message:\n',
@@ -402,11 +408,11 @@ const defaultCoins=[
 	  ],
     lib:"zec",
     opReturnLength:80,isAtomicSwapAvailable:true
-  }/*,{
+  },{
     coinScreenName: j?"野獣コイン":"Yajucoin",
     coinId: "yaju",
     unit: "YAJU",
-    unitEasy: j?"野獣先輩":"Yaju Senpai",
+    unitEasy: "¥",
     bip44: {
       coinType: 2005,
       account: 0
@@ -414,7 +420,7 @@ const defaultCoins=[
     bip21: "yajucoin",
     defaultFeeSatPerByte: 50,
     icon: require("../res/coins/yaju.png"),
-    apiEndpoints:[{url:"https://insight.neetcoin.jp/api",explorer:"https://insight.neetcoin.jp"}],
+    apiEndpoints:[{url:"https://yaju.insight.monacoin.ml/api",explorer:"https://yaju.insight.monacoin.ml"}],
     network: {
       messagePrefix: '\x19YAJUCOIN Signed Message:\n',
       bip32: {
@@ -428,7 +434,7 @@ const defaultCoins=[
     enableSegwit: false,
     lib: "blk",
     opReturnLength:0,isAtomicSwapAvailable:false
-  },{
+  }/*,{
     coinScreenName:j?"リンゴ":"Ringo",
     coinId:"ringo",
     unit:"RIN",
@@ -496,7 +502,7 @@ const defaultCoins=[
     bip21: "neetcoin",
     defaultFeeSatPerByte: 50,
     icon: require("../res/coins/neet.png"),
-    apiEndpoints:[{url:"https://insight.neetcoin.jp/api",explorer:"https://insight.neetcoin.jp"}],
+    apiEndpoints:[{url:"https://neet.insight.monacoin.ml/api",explorer:"https://insight.neetcoin.jp"},{url:"https://insight.neetcoin.jp/api",explorer:"https://insight.neetcoin.jp"}],
     network: {
       messagePrefix: '\x19NEETCOIN Signed Message:\n',
       bip32: {
@@ -510,12 +516,13 @@ const defaultCoins=[
     enableSegwit: false,
     lib: "blk",
     price: {
-      url: "https://insight.neetcoin.jp/api/ticker",
+      url: "https://api.crypto-bridge.org/api/v1/ticker",
       json: true,
       jsonPath: '$[?(@.id=="NEET_BTC")].last',
       fiat: "btc"
     },
-    opReturnLength:0,isAtomicSwapAvailable:false
+    opReturnLength:0,
+    isAtomicSwapAvailable:false
   }
 ]
 

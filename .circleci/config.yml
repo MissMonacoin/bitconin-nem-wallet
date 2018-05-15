@@ -38,7 +38,6 @@ jobs:
           mkdir dev/cwww
           cp -r cordovaProj/www/* dev/cwww
           cd dev
-          zip -r monya.zip ./
           git add .
           git commit -m "[ci skip] build on circle ci"
           git push origin master
@@ -54,6 +53,8 @@ jobs:
 
       - run: |
             /opt/sdk_install.sh "build-tools;19.1.0" "platforms;android-19"
+
+            apt-get -y install zip
             git clone https://github.com/monya-wallet/monya.git monya
             npm i
             npm run build:cordova
@@ -66,12 +67,16 @@ jobs:
             cd ../electron
             npm install
             npm run dist
+            cd ..
+            zip chrome_extension.zip chrome_extension
             
       - store_artifacts:
           path: cordovaProj/platforms/android/build/outputs/apk/
 
       - store_artifacts:
-          path: electron/dist 
+          path: electron/dist
+      - store_artifacts:
+          path: chrome_extension.zip
 
 workflows:
   version: 2
