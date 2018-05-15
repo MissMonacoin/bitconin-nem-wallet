@@ -12,16 +12,25 @@
       </div>
       <v-ons-button modifier="large" @click="decrypt" :disabled="loading">はじめる</v-ons-button>
     </div>
-    <div v-show="address" class="account">
-      <div id="banner"></div>
-      <v-ons-list>
-        <v-ons-list-item>
-          <v-ons-button modifier="large">きろくをのこす</v-ons-button>
-        </v-ons-list-item>
-        <v-ons-list-item>
-          <v-ons-button modifier="large">きろくをみる</v-ons-button>
-        </v-ons-list-item>
-      </v-ons-list>
+    <div v-show="address">
+      <div id="top" v-show="menu==='top'">
+        <div id="banner"></div>
+        <v-ons-list>
+          <v-ons-list-item>
+            <v-ons-button modifier="large" @click="menu='register'">きろくをのこす</v-ons-button>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <v-ons-button modifier="large" @click="menu='audit'">きろくをみる</v-ons-button>
+          </v-ons-list-item>
+        </v-ons-list>
+      </div>
+
+      <div id="register" v-show="menu==='register'">
+        
+      </div>
+      <div id="audit" v-show="menu==='audit'">
+        
+      </div>
     </div>
   </div>
   <v-ons-modal :visible="loading">

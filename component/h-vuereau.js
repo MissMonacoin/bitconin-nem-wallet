@@ -65,7 +65,10 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       addressFormat:"url",
 
       common:null,
-      transactionEntity:{}
+      transactionEntity:{},
+
+
+      menu:"top"
     }
   },
   store:require("../js/store.js"),
