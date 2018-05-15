@@ -26,7 +26,45 @@
       </div>
 
       <div id="register" v-show="menu==='register'">
-        
+        <v-ons-list>
+          <v-ons-list-item v-show="!alone">
+            <div class="center">
+              <v-ons-input v-model="s1" placeholder="誰"></v-ons-input>
+            </div>
+            <div class="right">
+              と
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <div class="center">
+              <v-ons-input v-model="s2" placeholder="誰"></v-ons-input>
+            </div>
+            <div class="right">
+              は
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <div class="right">
+              <v-ons-select v-model="verb">
+                <option v-for="verb in verbs" :value="verb.id">{{verb.name}}</option>
+              </v-ons-select>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item v-for="(k,v) in verbArg">
+            <div class="center">{{k}}</div>
+            <div class="right">
+              <v-ons-input v-model="args[v]"></v-ons-input>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-header>確認</v-ons-list-header>
+          <v-ons-list-item>
+            <div class="center">アポスティーユ文字列</div>
+            <div class="right"><v-ons-input :value="apostilleStr"></v-ons-input></div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <v-ons-button modifier="large" @click="send">きろく</v-ons-button>
+          </v-ons-list-item>
+        </v-ons-list>
       </div>
       <div id="audit" v-show="menu==='audit'">
         
@@ -46,9 +84,7 @@
     :visible.sync="confirm"
     >
     <span slot="title">送金確認</span>
-    <p>{{sendAddress}}</p>
-    <p>{{sendAmount}}</p>
-    <p>Fee: {{transactionEntity.fee/1e6}}</p>
+    <p v-if="apostille.transaction">Fee: {{apostille.transaction.fee/1e6}}</p>
     <template slot="footer">
       <div class="alert-dialog-button" @click="broadcast">送金</div>
       <div class="alert-dialog-button" @click="confirm=false">戻る</div>
