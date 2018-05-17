@@ -96,7 +96,11 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       s1:"",
       s2:"",
       verb:"getMarried",
-      args:{}
+      args:{},
+
+
+      success:false,
+      sentTxId:""
     }
   },
   store:require("../js/store.js"),
@@ -250,19 +254,21 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       });
     },
     copyAddress(){
-      coinUtil.copy(this.address)
+      coinUtil.copy(this.shareStr)
     },
     share(event){
       const targetRect = event.target.getBoundingClientRect(),
             targetBounds = targetRect.left + ',' + targetRect.top + ',' + targetRect.width + ',' + targetRect.height;
       coinUtil.share({
-        url:this.url
+        title:"ビット婚姻でチェックしよう",
+        message:this.shareStr
       },targetBounds).then(()=>{
       }).catch(()=>{
         this.copyAddress()
       })
     },
     send(){
+      this.sentTxId=""
       this.confirm=false
       this.loading=true
       let addrProm=Promise.resolve(this.sendAddress)
@@ -290,15 +296,13 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
         if(m.code>=2){
           throw m.message
         }
+        this.sentTxId=m.transactionHash.data
         this.loading=false
         this.sendAddress=""
         this.sendAmount=0
         this.message=""
         this.destTag=0
-        this.$store.commit("setFinishNextPage",{page:require("./home.js"),infoId:"sent",payload:{
-          txId:""
-        }})
-        this.$emit("replace",require("./finished.js"))
+        this.success=true
       }).catch(e=>{
         this.loading=false
         this.$store.commit("setError",e.data?e.data.message:e)
@@ -373,6 +377,15 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
         s2:this.s2,
         verb:this.verb,
         args:this.args
+      })
+    },
+    shareStr(){
+      return JSON.stringify({
+        s1:this.s1,
+        s2:this.s2,
+        verb:this.verb,
+        args:this.args,
+        txId:this.sentTxId
       })
     },
     verbArg(){

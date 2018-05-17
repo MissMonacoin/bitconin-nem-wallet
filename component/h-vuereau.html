@@ -83,11 +83,25 @@
     modifier="rowfooter"
     :visible.sync="confirm"
     >
-    <span slot="title">送金確認</span>
+    <span slot="title">確認</span>
     <p v-if="apostille.transaction">Fee: {{apostille.transaction.fee/1e6}}</p>
     <template slot="footer">
-      <div class="alert-dialog-button" @click="broadcast">送金</div>
-      <div class="alert-dialog-button" @click="confirm=false">戻る</div>
+      <div class="alert-dialog-button" @click="broadcast">あぽすていゆ</div>
+      <div class="alert-dialog-button" @click="confirm=false">やめて</div>
+    </template>
+  </v-ons-alert-dialog>
+
+  <v-ons-alert-dialog
+    modifier="rowfooter"
+    :visible.sync="success"
+    >
+    <span slot="title">みんなにしらせよう</span>
+    <p v-if="apostille.transaction">
+      <textarea cols="20" rows="10" :value="shareStr"></textarea>
+    </p>
+    <template slot="footer">
+      <div class="alert-dialog-button" @click="share">シェア / コピー</div>
+      <div class="alert-dialog-button" @click="success=false">やめて</div>
     </template>
   </v-ons-alert-dialog>
 
