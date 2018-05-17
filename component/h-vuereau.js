@@ -12,22 +12,28 @@ const DEFAULT_ACCOUNT=0
 const NETWORK=nem.model.network.data.mainnet.id
 
 const icons={
-  'nem:xem':require("../res/coins/nem.png"),
-  'ecobit:eco':require("../res/coins/ecob.png"),
-  "lc:jpy":require("../res/coins/lc/jpy.png"),
-  "lc:usd":require("../res/coins/lc/usd.png"),
-  "lc:zar":require("../res/coins/lc/zar.png"),
-  "lc:hkd":require("../res/coins/lc/hkd.png"),
-  "lc:eur":require("../res/coins/lc/eur.png"),
-  "lc:aud": require("../res/coins/lc/aud.png"),
-  "lc:gbp":require("../res/coins/lc/gbp.png"),
-  "lc:chf":require("../res/coins/lc/chf.png")
+
 }
 
 const verbs=[{
   id:"getMarried",
   name:"結婚する",
   args:{},
+  alone:false
+},{
+  id:"goTogether",
+  name:"付き合う",
+  args:{},
+  alone:false
+},{
+  id:"breakUp",
+  name:"別れる",
+  args:{},
+  alone:false
+},{
+  id:"getDivorced",
+  name:"離婚する",
+  args:{"reason":"理由"},
   alone:false
 },{
   id:"consentSex",
@@ -41,6 +47,13 @@ const verbs=[{
   name:"作った",
   args:{
     how:"何を"
+  },
+  alone:true
+},{
+  id:"love",
+  name:"好きです",
+  args:{
+    who:"何、誰を"
   },
   alone:true
 }]
