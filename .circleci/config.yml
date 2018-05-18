@@ -37,7 +37,7 @@ jobs:
           tar -czvf monya-nem.tar.gz dev
                   
       - store_artifacts:
-          path: dev
+          path: monya-nem.tar.gz
 
 workflows:
   version: 2
