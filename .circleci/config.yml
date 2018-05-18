@@ -30,61 +30,17 @@ jobs:
       - run: yarn run build
 
       - run: |
-          git clone "git@github.com:monya-wallet/dev.git" dev
-          git config --global user.name "circleci"
-          git config --global user.email "circleci@chatbox-inc.com"
-          rm -r dev/*
+          mkdir dev
           cp -r docs/wallet/* dev
           mkdir dev/cwww
           cp -r cordovaProj/www/* dev/cwww
-          cd dev
-          git add .
-          git commit -m "[ci skip] build on circle ci"
-          git push origin master
-
-  cordova:
-    docker:
-      - image: registry.gitlab.com/2ndlesmi/spinningprojects/monya
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - run: |
-            /opt/sdk_install.sh "build-tools;19.1.0" "platforms;android-19"
-
-            apt-get -y install zip
-            git clone https://github.com/monya-wallet/monya.git monya
-            npm i
-            npm run build:cordova
-            cd cordovaProj
-            npm i
-            gradle wrapper
-            cordova platform add android
-            cordova build android --release
-            cordova build android --debug
-            cd ../electron
-            npm install
-            npm run dist
-            cd ..
-            zip chrome_extension.zip chrome_extension
-            
+                  
       - store_artifacts:
-          path: cordovaProj/platforms/android/build/outputs/apk/
-
-      - store_artifacts:
-          path: electron/dist
-      - store_artifacts:
-          path: chrome_extension.zip
+          path: dev
 
 workflows:
   version: 2
-  build_and_cordova:
+  build:
     jobs:
       - build
-      - cordova:
-          filters:
-            branches:
-              only: master
       
