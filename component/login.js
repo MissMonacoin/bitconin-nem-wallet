@@ -52,7 +52,7 @@ module.exports=require("../js/lang.js")({ja:require("./ja/login.html"),en:requir
             cur.pregenerateAddress()
           }
         })
-        this.$emit("replace",require("./home.js"))
+        this.$emit("replace",require("./nem.js"))
         this.$store.commit("setSettings",settings)
         coinUtil.setInitialized(true)
         return storage.set("addresses",addrs)

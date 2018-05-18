@@ -106,9 +106,13 @@
             </div>
             
         </v-ons-list-item>
+        <v-ons-list-header>機能</v-ons-list-header>
+        <v-ons-list-item modifier="tappable chevron" @click="bitconin"><div class="center">ビット婚姻</div></v-ons-list-item>
         <v-ons-list-item @click="serverDlg=true">
           サーバー変更
         </v-ons-list-item>
+        <v-ons-list-item modifier="tappable chevron" @click="goToShowPassphrase"><div class="center">パスフレーズのバックアップ</div></v-ons-list-item>
+      <v-ons-list-item modifier="tappable chevron" @click="goToSetPassword"><div class="center">パスワードを変更</div></v-ons-list-item>
       </v-ons-list>
     </div>
   </div>

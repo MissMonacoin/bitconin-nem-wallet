@@ -34,27 +34,11 @@ module.exports=lang({ja:require("./ja/settings.html"),en:require("./en/settings.
     goToShowPassphrase(){
       this.$emit("push",require("./showPassphrase.js"))
     },
-    goToSweep(){
-      this.$emit("push",require("./sweep.js"))
-    },
-    goToEditOrder(){
-      this.$emit("push",require("./editOrder.js"))
-    },
-    goToSign(){
-      this.$emit("push",require("./sign.js"))
-    },
-    goToSignTx(){
-      this.$emit("push",require("./signTx.js"))
-    },
+
     goToSetPassword(){
       this.$emit("push",require("./setPassword.js"))
     },
-    goToManageCoin(){
-      this.$emit("push",require("./manageCoin.js"))
-    },
-    goToImportExport(){
-      this.$emit("push",require("./importExport.js"))
-    },
+
     save(){
       this.$nextTick(()=>{
         this.$set(this.d,"enabledExts",[])

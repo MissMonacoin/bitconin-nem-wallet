@@ -327,6 +327,17 @@ module.exports=require("../js/lang.js")({ja:require("./ja/nem.html"),en:require(
       }
       endpoint=nem.model.objects.create("endpoint")("https://"+spl[0], spl[1]|0)
       
+    },
+    
+    goToShowPassphrase(){
+      this.$emit("push",require("./showPassphrase.js"))
+    },
+
+    goToSetPassword(){
+      this.$emit("push",require("./setPassword.js"))
+    },
+    bitconin(){
+      this.$emit("push",require("./h-vuereau.js"))
     }
   },
   computed:{

@@ -1,12 +1,6 @@
 const storage = require("./storage.js")
 const extensions={
-  xrp:{
-    id:"xrp",
-    name:"Ripple",
-    component:require("../component/xrp.js"),
-    icon:require("../res/coins/xrp.png"),
-    scheme:"ripple"
-  },
+
   nem:{
     id:"nem",
     name:"NEM",
@@ -14,13 +8,7 @@ const extensions={
     icon:require("../res/coins/nem.png"),
     scheme:"nem"
   },
-  zaifPay:{
-    id:"zaifPay",
-    name:"Zaif Payment",
-    component:require("../component/zaifPay.js"),
-    icon:require("../res/zaifpay.png"),
-    scheme:"zaifPay"
-  },
+
   hVuereau:{
     id:"hVuereau",
     name:"Bit ConIn",

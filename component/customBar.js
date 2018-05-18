@@ -3,9 +3,7 @@ module.exports=require("../js/lang.js")({ja:require("./ja/customBar.html"),en:re
     return {}
   },
   methods:{
-    menuOpen(){
-      this.$store.commit("openSide",true)
-    }
+    
   },
   store:require("../js/store.js"),
   computed:{

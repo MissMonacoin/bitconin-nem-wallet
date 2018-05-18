@@ -29,28 +29,6 @@ module.exports=require("../js/lang.js")({ja:require("./ja/navigator.html"),en:re
   },
   store:require("../js/store.js"),
   methods:{
-
-    home(){
-      this.openSide=false;this.$set(this,"pageStack",[require("./home.js")])
-    },
-    receive(){
-      this.openSide=false;this.pageStack.push(require("./receive.js"))
-    },
-    send(){
-      this.openSide=false;this.pageStack.push(require("./send.js"))
-    },
-    history(){
-      this.openSide=false;this.pageStack.push(require("./history.js"))
-    },
-    settings(){
-      this.openSide=false;this.pageStack.push(require("./settings.js"))
-    },
-    help(){
-      this.openSide=false;this.pageStack.push(require("./help.js"))
-    },
-    monaparty(){
-      this.openSide=false;this.pageStack.push(require("./monaparty.js"))
-    },
     openExt(extId){
       this.openSide=false;this.pageStack.push(ext.get(extId).component)
     }
