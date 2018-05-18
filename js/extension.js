@@ -23,7 +23,7 @@ const extensions={
   },
   hVuereau:{
     id:"hVuereau",
-    name:"H-Vuereau",
+    name:"Bit ConIn",
     component:require("../component/h-vuereau.js"),
     icon:require("../res/zaifpay.png"),
     scheme:"h-vuereau"

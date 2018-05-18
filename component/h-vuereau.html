@@ -22,20 +22,30 @@
           <v-ons-list-item>
             <v-ons-button modifier="large" @click="menu='audit'">きろくをみる</v-ons-button>
           </v-ons-list-item>
+          <v-ons-list-item>
+            現在、日本では仮想通貨関連法による様々な規制があり、ちょっとしたことでも慎重になってしまいます。ですが、私はあることに気がつきました。 <br><br> <b>「ブロックチェーンで結婚する法律が未整備じゃん！」</b> <br/><br/>そこで私はNEMブロックチェーンの特性を最大限活用して、ブロックチェーンに永遠の愛を刻むアプリを作りました。<br><br>
+            本アプリは、好意の表明→婚約→性的合意→離婚という一連のプロセスをNEMブロックチェーンに書き込むことができます。<span style="font-size:small">必ずしも離婚する必要はありません</span><br/><br>なのでたぶん世界最速のNEM公証発行アプリです。
+          </v-ons-list-item>
         </v-ons-list>
       </div>
 
       <div id="register" v-show="menu==='register'">
         <v-ons-list>
-          <v-ons-list-item v-show="!alone">
+          <v-ons-list-item @click="menu='top'">
+            <div class="left">
+              <v-ons-icon icon="fa-arrow-left"></v-ons-icon>
+            </div>
+            <div class="center">戻る</div>
+          </v-ons-list-item>
+          <v-ons-list-item>
             <div class="center">
               <v-ons-input v-model="s1" placeholder="誰"></v-ons-input>
             </div>
             <div class="right">
-              と
+              {{alone?'は':'と'}}
             </div>
           </v-ons-list-item>
-          <v-ons-list-item>
+          <v-ons-list-item v-show="!alone">
             <div class="center">
               <v-ons-input v-model="s2" placeholder="誰"></v-ons-input>
             </div>
@@ -62,12 +72,35 @@
             <div class="right"><v-ons-input :value="apostilleStr"></v-ons-input></div>
           </v-ons-list-item>
           <v-ons-list-item>
-            <v-ons-button modifier="large" @click="send">きろく</v-ons-button>
+            <v-ons-button modifier="large" @click="send" :disabled="!s1||(!alone&&!s2)">きろく</v-ons-button>
           </v-ons-list-item>
         </v-ons-list>
       </div>
       <div id="audit" v-show="menu==='audit'">
-        
+        <v-ons-list>
+          <v-ons-list-item @click="menu='top'">
+            <div class="left">
+              <v-ons-icon icon="fa-arrow-left"></v-ons-icon>
+            </div>
+            <div class="center">戻る</div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <textarea style="width:100%" class="textarea--transparent" v-model="auditStr" placeholder="波括弧で囲まれた文字列を打ち込もう"></textarea>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <v-ons-button modifier="large" @click="check">チェック</v-ons-button>
+          </v-ons-list-item>
+          <v-ons-list-item v-show="checkData.verb">
+            {{checkData.s1}}{{checkData.s2&&("と"+checkData.s2)}}は{{getVerb(checkData.verb)}}<br />
+          </v-ons-list-item>
+          <v-ons-list-item v-for="(v,i) in checkData.args">
+            <div class="center">{{getVerbArgName(checkData.verb,i)}}</div>
+            <div class="right">{{v}}</div>
+          </v-ons-list-item>
+          <v-ons-list-item v-show="checkData.error">
+            失敗したかエラーです
+          </v-ons-list-item>
+        </v-ons-list>
       </div>
     </div>
   </div>
@@ -99,6 +132,8 @@
     <p v-if="apostille.transaction">
       <textarea cols="20" rows="10" :value="shareStr"></textarea>
     </p>
+
+    <v-ons-button modifier="quiet" @click="tweet(getUrl(shareStr))">Twitterでシェア</v-ons-button>
     <template slot="footer">
       <div class="alert-dialog-button" @click="share">シェア / コピー</div>
       <div class="alert-dialog-button" @click="success=false">やめて</div>

@@ -111,9 +111,12 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       verb:"getMarried",
       args:{},
 
-
+      auditStr:"",
+      
       success:false,
-      sentTxId:""
+      sentTxId:"",
+
+      checkData:{}
     }
   },
   store:require("../js/store.js"),
@@ -361,21 +364,58 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       }
       endpoint=nem.model.objects.create("endpoint")("https://"+spl[0], spl[1]|0)
       
+    },
+
+    getApostilleStr(s1,s2="",verb,args){
+      return JSON.stringify({s1,s2,verb,args})
+    },
+    
+    check(){
+      this.checkData={}
+      try{
+        const audit=JSON.parse(this.auditStr)
+        const apStr= nem.crypto.js.enc.Utf8.parse(this.getApostilleStr(audit.s1,audit.s2,audit.verb,audit.args))
+        nem.com.requests.transaction.byHash(endpoint, audit.txId).then((res)=> {
+        // Verify
+        if (nem.model.apostille.verify(apStr, res.transaction)) {
+          this.$set(this,"checkData",audit)
+        } else {
+          this.checkData={error:true}
+        }
+      }, function(err) {
+        this.checkData={error:true}
+      });
+      }catch(e){
+        this.checkData={error:true}
+      }
+      
+    },
+    getVerb(verb){
+      let ret;
+      this.verbs.forEach(v=>{
+        if(v.id===verb){
+          ret=v.name
+        }
+      })
+      return ret
+    },
+    getVerbArgName(verb,arg){
+      let ret;
+      this.verbs.forEach(v=>{
+        if(v.id===verb){
+          ret=v.args[arg]
+        }
+      })
+      return ret
+    },
+    getUrl(data){return `https://monya-wallet.github.io/monya/a/?amount=0&address=NEM_APOSTILLE_BITCONIN&label=${encodeURIComponent(data)}&scheme=h-vuereau`},
+    tweet(url){
+      coinUtil.openUrl("https://twitter.com/intent/tweet?text=%E3%83%93%E3%83%83%E3%83%88%E5%A9%9A%E5%A7%BB%E3%81%A7%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AB%E3%81%97%E3%82%89%E3%81%9B%E3%82%88%E3%81%86&url="+encodeURIComponent(url))
     }
   },
   computed:{
     url(){
-      this.invAmt=parseFloat(this.invAmt)||0
-      switch(this.addressFormat){
-        case "url":
-          return `https://monya-wallet.github.io/monya/a/?amount=${parseFloat(this.invAmt)||0}&address=${this.address}&label=${this.invMosaic}&scheme=nem`
-        case "monya":
-          return `nem:${this.address}?amount=${this.invAmt}&label=${this.invMosaic}`
-        case "nemWallet":
-          return `{"v":2,"type":2,"data":{"addr":"${this.address}","amount":${this.invAmt*1e6}}}`
-        default:
-          return this.address
-      }
+      return ""
     },
     isValidAddress(){
       if(this.sendAddress[0]==="@"){
@@ -385,12 +425,7 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
       }
     },
     apostilleStr(){
-      return JSON.stringify({
-        s1:this.s1,
-        s2:this.s2,
-        verb:this.verb,
-        args:this.args
-      })
+      return this.getApostilleStr(this.s1,this.s2,this.verb,this.args)
     },
     shareStr(){
       return JSON.stringify({
@@ -446,13 +481,9 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
   },
   mounted(){
     const rSend = this.$store.state.extensionSend||{}
-    const sa = parseFloat(rSend.amount)||0
-    if(rSend.address){
-      this.sendAddress=rSend.address
-      this.sendMosaic=rSend.label||"nem:xem"
-      if(sa){
-        this.sendAmount=sa
-      }
+    if(rSend.label){
+      this.menu="audit"
+      this.auditStr=rSend.label
     }
     this.$store.commit("setExtensionSend",{})
     this.connect()
