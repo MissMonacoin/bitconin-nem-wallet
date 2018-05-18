@@ -44,3 +44,7 @@ workflows:
     jobs:
       - build
       
+general:
+  branches:
+    only:
+      - h-bureau
