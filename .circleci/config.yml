@@ -34,7 +34,7 @@ jobs:
           cp -r docs/wallet/* dev
           mkdir dev/cwww
           cp -r cordovaProj/www/* dev/cwww
-          tar -czvf monya-nem.tar.gz
+          tar -czvf monya-nem.tar.gz dev
                   
       - store_artifacts:
           path: dev
