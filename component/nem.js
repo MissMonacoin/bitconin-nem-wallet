@@ -334,7 +334,7 @@ module.exports=require("../js/lang.js")({ja:require("./ja/nem.html"),en:require(
       this.invAmt=parseFloat(this.invAmt)||0
       switch(this.addressFormat){
         case "url":
-          return `https://monya-wallet.github.io/monya/a/?amount=${parseFloat(this.invAmt)||0}&address=${this.address}&label=${this.invMosaic}&scheme=nem`
+          return `https://monya-wallet.github.io/a/?amount=${parseFloat(this.invAmt)||0}&address=${this.address}&label=${this.invMosaic}&scheme=nem`
         case "monya":
           return `nem:${this.address}?amount=${this.invAmt}&label=${this.invMosaic}`
         case "nemWallet":
