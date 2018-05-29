@@ -18,17 +18,17 @@ const icons={
 const verbs=[{
   id:"getMarried",
   name:"結婚する",
-  args:{},
+  args:{"morePartner":"もっとパートナーを追加"},
   alone:false
 },{
   id:"goTogether",
   name:"付き合う",
-  args:{},
+  args:{"affairs":"浮気する"},
   alone:false
 },{
   id:"breakUp",
   name:"別れる",
-  args:{},
+  args:{"reason":"理由"},
   alone:false
 },{
   id:"getDivorced",
@@ -54,6 +54,20 @@ const verbs=[{
   name:"好きです",
   args:{
     who:"何、誰を"
+  },
+  alone:true
+},{
+  id:"feed",
+  name:"養う",
+  args:{
+    who:"誰を"
+  },
+  alone:true
+},{
+  id:"other",
+  name:"その他のこと",
+  args:{
+    details:"内容を教えてください"
   },
   alone:true
 }]
@@ -498,15 +512,7 @@ module.exports=require("../js/lang.js")({ja:require("./ja/h-vuereau.html"),en:re
   filters:{
     friendlyName(n){
       return {
-        "ecobit:eco":"EcoBit",
-        "lc:jpy":"円",// LCNEM currency name are recommened to be local notation
-        "lc:usd":"Dollar",
-        "lc:zar":"South African Dollar",
-        "lc:hkd":"Hong Kong Dollar",
-        "lc:eur":"Euro",
-        "lc:aud":"Australian Dollar",
-        "lc:gbp":"Pound sterling",
-        "lc:chf":"Schweizer Franken"
+        "ecobit:eco":"EcoBit"
       }[n]||n
     }
   }
